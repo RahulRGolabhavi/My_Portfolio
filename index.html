@@ -33,12 +33,19 @@
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
 
-    <!-- React & ReactDOM -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Performance Optimizations -->
+    <link rel="preload" as="image"
+        href="https://image2url.com/r2/default/images/1773586051047-1ce33ab6-3eb5-42db-8da8-6ab856fe175b.png"
+        fetchpriority="high">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- React & ReactDOM (Deferred to not block HTML parsing) -->
+    <script defer crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script defer crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
     <!-- Babel -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -669,13 +676,55 @@
             border: 1px solid var(--border-light);
             border-radius: 2rem;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .skill-tag:hover {
-            background: rgba(99, 102, 241, 0.15);
-            border-color: rgba(99, 102, 241, 0.4);
-            transform: translateY(-2px);
+            transform: translateY(-4px) scale(1.05);
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 10px 20px -10px rgba(168, 85, 247, 0.5);
+        }
+
+        .skill-tag:hover::before {
+            opacity: 1;
+        }
+
+        .skill-icon-img {
+            width: 18px;
+            height: 18px;
+            margin-right: 6px;
+            object-fit: contain;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .skill-icon-i {
+            margin-right: 6px;
+            font-size: 16px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .skill-tag:hover .skill-icon-img,
+        .skill-tag:hover .skill-icon-i {
+            transform: scale(1.2) rotate(5deg);
         }
 
         /* Projects Section */
@@ -1000,7 +1049,8 @@
                 margin-bottom: 2rem;
             }
 
-            .timeline::before, .timeline-progress {
+            .timeline::before,
+            .timeline-progress {
                 left: 0;
             }
 
@@ -1034,7 +1084,27 @@
 </head>
 
 <body>
-    <div id="root"></div>
+    <div id="root">
+        <!-- Initial Loader for Instant First Contentful Paint -->
+        <div
+            style="display: flex; height: 100vh; width: 100vw; align-items: center; justify-content: center; background-color: #0a0a0f;">
+            <div
+                style="width: 50px; height: 50px; border: 3px solid rgba(99, 102, 241, 0.2); border-radius: 50%; border-top-color: #6366f1; animation: initialSpin 1s ease-in-out infinite;">
+            </div>
+            <style>
+                @keyframes initialSpin {
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
+
+                body {
+                    margin: 0;
+                    background-color: #0a0a0f;
+                }
+            </style>
+        </div>
+    </div>
 
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
@@ -1075,6 +1145,54 @@
         };
 
         // --- COMPONENTS ---
+
+        const getSkillIcon = (skillName) => {
+            const devicon = (name) => `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${name}/${name}-original.svg`;
+            const simpleicon = (name, color) => `https://cdn.simpleicons.org/${name}/${color}`;
+
+            const iconMap = {
+                "HTML5": { type: 'img', src: devicon("html5") },
+                "HTML/CSS": { type: 'img', src: devicon("html5") },
+                "CSS3": { type: 'img', src: devicon("css3") },
+                "JavaScript": { type: 'img', src: devicon("javascript") },
+                "React": { type: 'img', src: devicon("react") },
+                "Java": { type: 'img', src: devicon("java") },
+                "Spring Boot": { type: 'img', src: devicon("spring") },
+                "RESTful APIs": { type: 'img', src: simpleicon("postman", "FF6C37") },
+                "REST APIs": { type: 'img', src: simpleicon("postman", "FF6C37") },
+                "MySQL": { type: 'img', src: devicon("mysql") },
+                "Data Structures": { type: 'icon', class: "fa-solid fa-cubes", color: "#6366f1" },
+                "Algorithm": { type: 'icon', class: "fa-solid fa-code-branch", color: "#a855f7" },
+                "OOPS": { type: 'icon', class: "fa-solid fa-object-group", color: "#ec4899" },
+                "Git": { type: 'img', src: devicon("git") },
+                "GitHub": { type: 'icon', class: "fa-brands fa-github", color: "var(--text-main)" },
+                "Postman": { type: 'img', src: simpleicon("postman", "FF6C37") },
+                "Figma": { type: 'img', src: devicon("figma") },
+                "ChatGPT": { type: 'img', src: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/ChatGPT-Logo.svg/1280px-ChatGPT-Logo.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail" },
+                "Gemini": { type: 'img', src: simpleicon("googlegemini", "8E75B2") },
+                "Claude": { type: 'img', src: "https://cdn.worldvectorlogo.com/logos/claude-logo.svg" },
+                "GitHub Copilot": { type: 'icon', class: "fa-solid fa-robot", color: "var(--text-main)" },
+                "IoT": { type: 'icon', class: "fa-solid fa-wifi", color: "#0ea5e9" },
+                "Machine Learning": { type: 'icon', class: "fa-solid fa-network-wired", color: "#8b5cf6" },
+                "Python": { type: 'img', src: devicon("python") },
+                "Sensors": { type: 'icon', class: "fa-solid fa-satellite-dish", color: "#10b981" }
+            };
+            return iconMap[skillName] || { type: 'icon', class: "fa-solid fa-check", color: "var(--primary)" };
+        };
+
+        const SkillTag = ({ skill, style = {} }) => {
+            const iconData = getSkillIcon(skill);
+            return (
+                <span className="skill-tag" style={style}>
+                    {iconData.type === 'img' ? (
+                        <img src={iconData.src} alt={skill} className="skill-icon-img" />
+                    ) : (
+                        <i className={`${iconData.class} skill-icon-i`} style={{ color: iconData.color }}></i>
+                    )}
+                    {skill}
+                </span>
+            );
+        };
 
         const Navbar = ({ isDarkMode, toggleTheme }) => {
             const [scrolled, setScrolled] = useState(false);
@@ -1218,7 +1336,7 @@
                     .replace(/</g, '&lt;')
                     .replace(/>/g, '&gt;')
                     .replace(/\b(public|class|private|return|new|boolean|true|false|void|int|double)\b/g, '<span class=\'terminal-keyword\'>$1</span>')
-                    .replace(/\b(String|String\[\]|Experience)\b/g, '<span class=\'terminal-function\'>$1</span>')
+                    .replace(/(\bString\b|String\[\]|\bExperience\b)/g, '<span class=\'terminal-function\'>$1</span>')
                     .replace(/("[^"]*")/g, '<span class=\'terminal-string\'>$1</span>')
                     .replace(/(@\w+)/g, '<span style=\'color: #fbbf24\'>$1</span>')
                     .replace(/([{}()])/g, '<span class=\'terminal-bracket\'>$1</span>')
@@ -1309,7 +1427,13 @@
                     <div className="container hero-content">
                         <RevealOnScroll className="hero-text">
                             <div className="hero-avatar">
-                                <img src="https://image2url.com/r2/default/images/1773586051047-1ce33ab6-3eb5-42db-8da8-6ab856fe175b.png" alt="Rahul R Golabhavi" />
+                                <img
+                                    src="https://image2url.com/r2/default/images/1773586051047-1ce33ab6-3eb5-42db-8da8-6ab856fe175b.png"
+                                    alt="Rahul R Golabhavi"
+                                    width="200"
+                                    height="200"
+                                    fetchpriority="high"
+                                />
                             </div>
                             <h3 className="hero-name">Hi, I'm Rahul R Golabhavi</h3>
                             <h1>
@@ -1376,7 +1500,7 @@
                                         <div className="stat-label">Years Committed</div>
                                     </div>
                                     <div className="glass-card stat-card">
-                                        <div className="stat-number">3+</div>
+                                        <div className="stat-number">2+</div>
                                         <div className="stat-label">Projects Built</div>
                                     </div>
                                     <div className="glass-card stat-card">
@@ -1443,7 +1567,7 @@
                                         <h3><i className={`fa-solid ${cat.icon}`}></i> {cat.title}</h3>
                                         <div className="skill-tags">
                                             {cat.skills.map((skill, sIdx) => (
-                                                <span key={sIdx} className="skill-tag">{skill}</span>
+                                                <SkillTag key={sIdx} skill={skill} />
                                             ))}
                                         </div>
                                     </div>
@@ -1498,7 +1622,7 @@
 
                                             <div className="skill-tags" style={{ marginBottom: '1.5rem', marginTop: 'auto' }}>
                                                 {project.tech.map((t, i) => (
-                                                    <span key={i} className="skill-tag" style={{ fontSize: '0.8rem', padding: '0.2rem 0.6rem' }}>{t}</span>
+                                                    <SkillTag key={i} skill={t} style={{ fontSize: '0.8rem', padding: '0.2rem 0.6rem' }} />
                                                 ))}
                                             </div>
 
@@ -1521,15 +1645,15 @@
                     if (!timelineRef.current) return;
                     const rect = timelineRef.current.getBoundingClientRect();
                     const windowHeight = window.innerHeight;
-                    
-                    const start = windowHeight * 0.7; 
+
+                    const start = windowHeight * 0.7;
                     let progress = (start - rect.top) / rect.height;
                     progress = Math.max(0, Math.min(1, progress));
                     setLineHeight(progress * 100);
                 };
 
                 window.addEventListener('scroll', handleScroll);
-                handleScroll(); 
+                handleScroll();
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
