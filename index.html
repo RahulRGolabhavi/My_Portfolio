@@ -4,7 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Rahul R Golabhavi — Full Stack Developer specializing in Java, Spring Boot, and modern web technologies. Explore my projects, skills, and experience.">
+    <meta name="keywords"
+        content="Rahul R Golabhavi, Full Stack Developer, Java Developer, Spring Boot, REST APIs, Web Developer, Portfolio, Software Engineer, Bangalore, Backend Developer, Computer Science">
+    <meta name="author" content="Rahul R Golabhavi">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rahul R Golabhavi | Full Stack Developer">
+    <meta property="og:description"
+        content="Full Stack Developer specializing in Java, Spring Boot, and modern web technologies. Explore my projects, skills, and experience.">
+    <meta property="og:image"
+        content="https://image2url.com/r2/default/images/1773586051047-1ce33ab6-3eb5-42db-8da8-6ab856fe175b.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rahul R Golabhavi | Full Stack Developer">
+    <meta name="twitter:description"
+        content="Full Stack Developer specializing in Java, Spring Boot, and modern web technologies.">
+    <meta name="twitter:image"
+        content="https://image2url.com/r2/default/images/1773586051047-1ce33ab6-3eb5-42db-8da8-6ab856fe175b.png">
+
     <title>Rahul R Golabhavi | Full Stack Developer</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
 
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -13,13 +40,14 @@
     <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
         rel="stylesheet">
 
     <style>
@@ -67,7 +95,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Google Sans', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
             overflow-x: hidden;
@@ -96,7 +124,7 @@
         h5,
         h6,
         .nav-brand {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Google Sans', sans-serif;
             word-wrap: break-word;
             overflow-wrap: break-word;
         }
@@ -144,6 +172,18 @@
             }
         }
 
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
         /* Ambient Glow */
         .glow-container {
             position: fixed;
@@ -185,6 +225,10 @@
             width: 600px;
             height: 600px;
             background: rgba(236, 72, 153, 0.2);
+        }
+
+        .light-theme .glow-circle {
+            opacity: 0.15;
         }
 
         /* Theme Toggle Slider */
@@ -316,7 +360,7 @@
             padding: 0.75rem 1.5rem;
             border-radius: 2rem;
             text-decoration: none;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Google Sans', sans-serif;
             font-weight: 600;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -354,35 +398,39 @@
 
         .hero-content {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
         }
 
         .hero-text h1 {
-            font-size: 4rem;
-            line-height: 1.1;
+            font-size: 2rem;
+            line-height: 1.15;
             margin-bottom: 1rem;
         }
 
+        .hero-text h3.hero-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
         .hero-text p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             margin-bottom: 2rem;
             max-width: 500px;
         }
 
-        .hero-image {
-            position: relative;
-        }
-
-        .hero-image-wrapper {
-            position: relative;
-            z-index: 1;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        .hero-avatar {
+            width: 200px;
+            height: 200px;
             overflow: hidden;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+            border: 3px solid rgba(99, 102, 241, 0.5);
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.3);
+            margin-bottom: 1.5rem;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             animation: morphing 10s ease-in-out infinite;
         }
 
@@ -408,11 +456,136 @@
             }
         }
 
-        .hero-image img {
+        .hero-avatar img {
             width: 100%;
-            height: auto;
+            height: 100%;
             object-fit: cover;
             display: block;
+        }
+
+        /* Terminal Card */
+        .terminal-perspective {
+            perspective: 1000px;
+        }
+
+        .terminal-card {
+            background: linear-gradient(145deg, rgba(15, 15, 25, 0.95), rgba(10, 10, 20, 0.98));
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 1rem;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 0.4s ease;
+            will-change: transform;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .terminal-card:hover {
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(99, 102, 241, 0.15),
+                0 0 80px rgba(168, 85, 247, 0.08);
+        }
+
+        .light-theme .terminal-card {
+            background: linear-gradient(145deg, rgba(30, 30, 50, 0.95), rgba(20, 20, 40, 0.98));
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.2rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red {
+            background: #ff5f57;
+        }
+
+        .terminal-dot.yellow {
+            background: #ffbd2e;
+        }
+
+        .terminal-dot.green {
+            background: #28c840;
+        }
+
+        .terminal-title {
+            margin-left: 0.75rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: 'Courier New', monospace;
+        }
+
+        .terminal-body {
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.9;
+            min-height: 280px;
+            color: #e2e8f0;
+        }
+
+        .terminal-line {
+            opacity: 0;
+            animation: terminalFadeIn 0.5s ease forwards;
+        }
+
+        .terminal-prompt {
+            color: #28c840;
+        }
+
+        .terminal-cmd {
+            color: #e2e8f0;
+        }
+
+        .terminal-comment {
+            color: #6b7280;
+        }
+
+        .terminal-keyword {
+            color: #c084fc;
+        }
+
+        .terminal-string {
+            color: #34d399;
+        }
+
+        .terminal-function {
+            color: #60a5fa;
+        }
+
+        .terminal-bracket {
+            color: #fbbf24;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: #28c840;
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+
+        @keyframes terminalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* About Section */
@@ -450,7 +623,7 @@
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--primary);
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Google Sans', sans-serif;
             margin-bottom: 0.5rem;
         }
 
@@ -561,8 +734,18 @@
             bottom: 0;
             left: 20px;
             width: 2px;
+            background: rgba(168, 85, 247, 0.15);
+            border-radius: 2px;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 20px;
+            width: 2px;
             background: linear-gradient(to bottom, var(--primary), var(--secondary));
             border-radius: 2px;
+            z-index: 1;
         }
 
         .timeline-item {
@@ -726,6 +909,16 @@
                 margin: 0 auto 2rem;
             }
 
+            .hero-avatar {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .terminal-perspective {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
             .about-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -789,7 +982,7 @@
             }
 
             .hero-text h1 {
-                font-size: 2.2rem;
+                font-size: 1.5rem;
             }
 
             .hero-text h3 {
@@ -797,12 +990,17 @@
                 margin-bottom: 1rem !important;
             }
 
+            .terminal-body {
+                min-height: 220px;
+                font-size: 0.78rem;
+            }
+
             .section-title {
                 font-size: 2rem;
                 margin-bottom: 2rem;
             }
 
-            .timeline::before {
+            .timeline::before, .timeline-progress {
                 left: 0;
             }
 
@@ -919,7 +1117,7 @@
                             <li className="mobile-only">
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem', borderTop: '1px solid var(--glass-border)', paddingTop: '1rem' }}>
                                     <span style={{ color: 'var(--text-main)', fontSize: '0.9rem', fontWeight: '500' }}>Theme Preference</span>
-                                    <div className="theme-switch-wrapper" style={{ margin: 0 }} onClick={toggleTheme}>
+                                    <div className="theme-switch-wrapper" style={{ margin: 0 }} onClick={toggleTheme} role="button" aria-label="Toggle theme">
                                         <div className={`theme-switch ${isDarkMode ? 'dark' : 'light'}`}>
                                             <div className="theme-knob">
                                                 <i className={`fa-solid ${isDarkMode ? 'fa-moon' : 'fa-sun'}`}></i>
@@ -936,7 +1134,7 @@
                             </li>
                         </ul>
                         <div className="nav-actions" style={{ display: 'flex', alignItems: 'center' }}>
-                            <div className="theme-switch-wrapper" onClick={toggleTheme} title="Toggle theme">
+                            <div className="theme-switch-wrapper" onClick={toggleTheme} title="Toggle theme" role="button" aria-label="Toggle theme">
                                 <div className={`theme-switch ${isDarkMode ? 'dark' : 'light'}`}>
                                     <div className="theme-knob">
                                         <i className={`fa-solid ${isDarkMode ? 'fa-moon' : 'fa-sun'}`}></i>
@@ -953,9 +1151,126 @@
             );
         };
 
+        // --- Terminal Card Component ---
+        const TerminalCard = () => {
+            const cardRef = useRef(null);
+            const codeSnippet =
+                `public class Experience {
+
+    String current = "Training @ Tap Academy";
+    String previous = "Developer @ UST";
+    // Back End
+    String[] backend = { "Java", "Spring Boot", "REST APIs" };
+    
+    // Front End
+    String[] frontend = { "React", "HTML5", "CSS3", "JavaScript" };
+    
+    // Database
+    String[] database = { "MySQL" };
+    boolean openToWork = true;
+
+    public void engineerSolutions() {
+        while (requirements.evolve()) {
+            architectSystems();
+            optimizePerformance();
+            deliverValue();
+        }
+    }
+}`;
+
+            const [typedCode, setTypedCode] = useState('');
+            const [isDeleting, setIsDeleting] = useState(false);
+            const [typingSpeed, setTypingSpeed] = useState(50);
+
+            useEffect(() => {
+                let ticker = setInterval(() => {
+                    tick();
+                }, typingSpeed);
+                return () => clearInterval(ticker);
+            }, [typedCode, isDeleting, typingSpeed]);
+
+            const tick = () => {
+                let updatedText = isDeleting
+                    ? codeSnippet.substring(0, typedCode.length - 1)
+                    : codeSnippet.substring(0, typedCode.length + 1);
+
+                setTypedCode(updatedText);
+
+                if (isDeleting) {
+                    setTypingSpeed(15); // Fast delete
+                } else {
+                    setTypingSpeed(40); // Normal typing
+                }
+
+                if (!isDeleting && updatedText === codeSnippet) {
+                    setIsDeleting(true);
+                    setTypingSpeed(3500); // Long pause when fully typed
+                } else if (isDeleting && updatedText === '') {
+                    setIsDeleting(false);
+                    setTypingSpeed(1000); // Pause before starting again
+                }
+            };
+
+            // Syntax highlighting for the typed code
+            const highlightJava = (code) => {
+                return code
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/\b(public|class|private|return|new|boolean|true|false|void|int|double)\b/g, '<span class=\'terminal-keyword\'>$1</span>')
+                    .replace(/\b(String|String\[\]|Experience)\b/g, '<span class=\'terminal-function\'>$1</span>')
+                    .replace(/("[^"]*")/g, '<span class=\'terminal-string\'>$1</span>')
+                    .replace(/(@\w+)/g, '<span style=\'color: #fbbf24\'>$1</span>')
+                    .replace(/([{}()])/g, '<span class=\'terminal-bracket\'>$1</span>')
+                    .replace(/(\/{2}.*)/g, '<span class=\'terminal-comment\'>$1</span>');
+            };
+
+            const handleMouseMove = (e) => {
+                const card = cardRef.current;
+                if (!card) return;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -12;
+                const rotateY = ((x - centerX) / centerX) * 12;
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+            };
+
+            const handleMouseLeave = () => {
+                const card = cardRef.current;
+                if (!card) return;
+                card.style.transform = 'rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            };
+
+            return (
+                <div className="terminal-perspective">
+                    <div
+                        className="terminal-card"
+                        ref={cardRef}
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <div className="terminal-header">
+                            <div className="terminal-dot red"></div>
+                            <div className="terminal-dot yellow"></div>
+                            <div className="terminal-dot green"></div>
+                            <span className="terminal-title">Experience.java</span>
+                        </div>
+                        <div className="terminal-body">
+                            <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                                <code dangerouslySetInnerHTML={{ __html: highlightJava(typedCode) }} />
+                                <span className="terminal-cursor"></span>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
         const Hero = () => {
             const [text, setText] = useState('');
-            const fullText = "Full Stack Developer";
             const [isDeleting, setIsDeleting] = useState(false);
             const [loopNum, setLoopNum] = useState(0);
             const [typingSpeed, setTypingSpeed] = useState(150);
@@ -981,7 +1296,7 @@
 
                 if (!isDeleting && updatedText === fullRole) {
                     setIsDeleting(true);
-                    setTypingSpeed(2000); // pause at end
+                    setTypingSpeed(2000);
                 } else if (isDeleting && updatedText === '') {
                     setIsDeleting(false);
                     setLoopNum(loopNum + 1);
@@ -993,25 +1308,24 @@
                 <section className="hero" id="home">
                     <div className="container hero-content">
                         <RevealOnScroll className="hero-text">
-                            <h3>Hi, I'm Rahul R Golabhavi</h3>
+                            <div className="hero-avatar">
+                                <img src="https://image2url.com/r2/default/images/1773586051047-1ce33ab6-3eb5-42db-8da8-6ab856fe175b.png" alt="Rahul R Golabhavi" />
+                            </div>
+                            <h3 className="hero-name">Hi, I'm Rahul R Golabhavi</h3>
                             <h1>
-                                Passionate About Building <span className="text-gradient">Efficient</span> & <br />
-                                <span className="text-gradient">Scalable</span> Software
+                                Building <span className="text-gradient">Efficient</span> & <span className="text-gradient">Scalable</span> Software
                             </h1>
                             <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem', height: '30px', color: 'var(--secondary)' }}>
                                 I am a {text}<span style={{ borderRight: '2px solid var(--secondary)', animation: 'blink 1s infinite' }}></span>
                             </h3>
-                            <p>Computer Science graduate and detail-oriented developer, crafting functional systems and modern scalable architectures for the future.</p>
                             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                                 <a href="#contact" className="btn btn-primary">Get In Touch</a>
                                 <a href="#projects" className="btn btn-outline">View Work</a>
                             </div>
                         </RevealOnScroll>
 
-                        <RevealOnScroll className="hero-image">
-                            <div className="hero-image-wrapper">
-                                <img src="https://image2url.com/r2/default/images/1773586051047-1ce33ab6-3eb5-42db-8da8-6ab856fe175b.png" alt="Rahul R Golabhavi" />
-                            </div>
+                        <RevealOnScroll>
+                            <TerminalCard />
                         </RevealOnScroll>
                     </div>
                 </section>
@@ -1059,7 +1373,7 @@
                                 <div className="stats-grid">
                                     <div className="glass-card stat-card">
                                         <div className="stat-number">1+</div>
-                                        <div className="stat-label">Years Commited</div>
+                                        <div className="stat-label">Years Committed</div>
                                     </div>
                                     <div className="glass-card stat-card">
                                         <div className="stat-number">3+</div>
@@ -1147,15 +1461,13 @@
                     title: "ServeEase - Service Marketplace",
                     category: "Full Stack Web Platform",
                     description: "Developed a comprehensive full-stack service marketplace at UST. Implemented a robust booking engine, a sophisticated service provider management module, and specialized administrative controls. Engineered and integrated RESTful APIs to guarantee smooth, secure communication between frontend components and backend logic, greatly enhancing platform reliability.",
-                    tech: ["Java", "Spring Boot", "MySQL", "REST APIs", "HTML/CSS"],
-                    link: "#"
+                    tech: ["Java", "Spring Boot", "MySQL", "REST APIs", "HTML/CSS"]
                 },
                 {
                     title: "IoT Foot Pressure Monitoring",
                     category: "Hardware + ML System",
                     description: "Designed smart footwear for diabetic patients aimed at tracking foot pressure distributions. Utilized flex sensors and machine learning algorithms to identify irregular pressure zones. Programmatically generated dynamic visual reports from real-time data to assist healthcare professionals in early intervention.",
                     tech: ["IoT", "Machine Learning", "Python", "Sensors"],
-                    link: "#",
                     award: "Best Project Award @ CarpeDiem '24"
                 }
             ];
@@ -1190,9 +1502,6 @@
                                                 ))}
                                             </div>
 
-                                            <div className="project-links">
-                                                {/* <a href={project.link} className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>View Details</a> */}
-                                            </div>
                                         </div>
                                     </div>
                                 </RevealOnScroll>
@@ -1204,6 +1513,26 @@
         };
 
         const Education = () => {
+            const [lineHeight, setLineHeight] = useState(0);
+            const timelineRef = useRef(null);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    if (!timelineRef.current) return;
+                    const rect = timelineRef.current.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    
+                    const start = windowHeight * 0.7; 
+                    let progress = (start - rect.top) / rect.height;
+                    progress = Math.max(0, Math.min(1, progress));
+                    setLineHeight(progress * 100);
+                };
+
+                window.addEventListener('scroll', handleScroll);
+                handleScroll(); 
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
             return (
                 <section id="education" style={{ background: 'rgba(255,255,255,0.01)' }}>
                     <div className="container">
@@ -1211,7 +1540,8 @@
                             <h2 className="section-title">Education & <span className="text-gradient">Experience</span></h2>
                         </RevealOnScroll>
 
-                        <div className="timeline">
+                        <div className="timeline" ref={timelineRef}>
+                            <div className="timeline-progress" style={{ height: `${lineHeight}%` }}></div>
                             <RevealOnScroll>
                                 <div className="timeline-item">
                                     <div className="glass-card timeline-content">
@@ -1308,21 +1638,21 @@
                                 <form onSubmit={handleSubmit}>
                                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                                         <div className="form-group">
-                                            <label>Name</label>
-                                            <input type="text" name="name" className="form-control" required placeholder="John Doe" />
+                                            <label htmlFor="contact-name">Name</label>
+                                            <input type="text" id="contact-name" name="name" className="form-control" required placeholder="John Doe" />
                                         </div>
                                         <div className="form-group">
-                                            <label>Email</label>
-                                            <input type="email" name="email" className="form-control" required placeholder="john@example.com" />
+                                            <label htmlFor="contact-email">Email</label>
+                                            <input type="email" id="contact-email" name="email" className="form-control" required placeholder="john@example.com" />
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label>Subject</label>
-                                        <input type="text" name="subject" className="form-control" required placeholder="Opportunity Collaboration" />
+                                        <label htmlFor="contact-subject">Subject</label>
+                                        <input type="text" id="contact-subject" name="subject" className="form-control" required placeholder="Opportunity Collaboration" />
                                     </div>
                                     <div className="form-group">
-                                        <label>Message</label>
-                                        <textarea name="message" className="form-control" required placeholder="Tell me about your project..."></textarea>
+                                        <label htmlFor="contact-message">Message</label>
+                                        <textarea id="contact-message" name="message" className="form-control" required placeholder="Tell me about your project..."></textarea>
                                     </div>
                                     <button type="submit" className="btn btn-primary" style={{ width: '100%', marginBottom: '1rem' }}>Send Message</button>
                                     {result && <p style={{ textAlign: 'center', color: result.includes("Error") ? 'var(--accent)' : 'var(--secondary)' }}>{result}</p>}
@@ -1338,7 +1668,7 @@
             return (
                 <footer>
                     <div className="container">
-                        <h2 style={{ fontFamily: 'Space Grotesk', fontSize: '1.8rem', marginBottom: '1rem', letterSpacing: '2px' }}>
+                        <h2 style={{ fontFamily: 'Google Sans', fontSize: '2.2rem', marginBottom: '1rem', letterSpacing: '2px' }}>
                             RAHUL R GOLABHAVI
                         </h2>
                         <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
@@ -1353,9 +1683,13 @@
         };
 
         const App = () => {
-            const [isDarkMode, setIsDarkMode] = useState(true);
+            const [isDarkMode, setIsDarkMode] = useState(() => {
+                const saved = localStorage.getItem('portfolio-theme');
+                return saved ? saved === 'dark' : true;
+            });
 
             useEffect(() => {
+                localStorage.setItem('portfolio-theme', isDarkMode ? 'dark' : 'light');
                 if (isDarkMode) {
                     document.body.classList.remove('light-theme');
                 } else {
@@ -1376,13 +1710,22 @@
                         <div className="glow-circle glow-3"></div>
                     </div>
 
-                    <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-                    <Hero />
-                    <About />
-                    <Skills />
-                    <Projects />
-                    <Education />
-                    <Contact />
+                    {/* Header */}
+                    <header>
+                        <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+                        <Hero />
+                    </header>
+
+                    {/* Main Body */}
+                    <main>
+                        <About />
+                        <Skills />
+                        <Projects />
+                        <Education />
+                        <Contact />
+                    </main>
+
+                    {/* Footer */}
                     <Footer />
                 </>
             );
